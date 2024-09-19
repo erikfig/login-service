@@ -16,6 +16,7 @@ async function bootstrap() {
     .setDescription('Login Service')
     .setVersion('1.0')
     .addTag('login')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
