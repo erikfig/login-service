@@ -12,8 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: wget
-        run: wget https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem
       - name: install dependencies
         run: yarn install
       - name: build
