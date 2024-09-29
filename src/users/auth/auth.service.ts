@@ -1,4 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { compare } from 'bcrypt';
 import { AuthRequestDto } from './auth-request.dto';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
@@ -28,7 +29,7 @@ export class AuthService {
       throw new UnauthorizedException();
     }
 
-    if (user.password !== data.password) {
+    if ((await this.comparePassword(data.password, user.password)) === false) {
       throw new UnauthorizedException();
     }
 
@@ -50,5 +51,12 @@ export class AuthService {
     return {
       success: true,
     };
+  }
+
+  private async comparePassword(
+    password: string,
+    hash: string,
+  ): Promise<boolean> {
+    return await compare(password, hash);
   }
 }
