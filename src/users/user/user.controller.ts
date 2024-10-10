@@ -16,7 +16,8 @@ import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 export class UserController {
   constructor(private service: UserService) {}
 
-  @ApiBearerAuth()
+  // TODO: Add @ApiBearerAuth() decorator to BLOCK or PROTECT user creation.
+  // @ApiBearerAuth()
   @ApiResponse({ status: 200, description: 'Success.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   @UseGuards(AuthGuard)
